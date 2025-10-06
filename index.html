@@ -40,7 +40,7 @@
     <a-assets>
       <img id="thumbCastle" crossorigin="anonymous" src="https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/NFU.png" />
       <img id="thumbSchool" crossorigin="anonymous" src="https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/castle.png" />
-      <img id="thumbEgypt" crossorigin="anonymous" src="https://cdn.aframe.io/link-traversal/thumbs/egypt.png" />
+      <img id="thumbEgypt" crossorigin="anonymous" src="https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/3DVideo.jpg" />
     </a-assets>
     <!-- 標題說明 -->
     <a-entity position="0 4 -4"
@@ -126,14 +126,21 @@
 
     <a-entity id="panelVideo" class="info-panel" position="0 1.6 -2.5" visible="false" look-at="[camera]"
       mixin="panelAnim">
-      <a-plane width="3" height="2" color="#222" position="0 0 -0.01" material="opacity:0.85"></a-plane>
-      <a-entity troika-text="value: Video 的詳細介紹內容; fontSize:0.22; color:#fff; maxWidth:2.7; anchor:left"
+      <a-plane width="3.1" height="2" color="#222" position="0 0 -0.01" material="opacity:0.9"></a-plane>
+      <a-entity troika-text="value: 將3D導入至Aframe\n是否前往觀看?\n(若進去後想離開請回上ㄧ頁); fontSize:0.22; color:#fff; maxWidth:2.7; anchor:left"
         position="-1.35 0.55 0.01"></a-entity>
-      <a-entity troika-text="value: 前往; fontSize:0.2; color:#ff0" geometry="primitive: plane; width: 1; height: 0.4"
-        material="color:#666" position="-0.5 -0.6 0.01" class="raycastable" link="href: Video.html"></a-entity>
-      <a-entity troika-text="value: 關閉; fontSize:0.2; color:#f33" geometry="primitive: plane; width: 1; height: 0.4"
-        material="color:#666" position="1 -0.6 0.01" class="raycastable" close-panel="target: #panelVideo"></a-entity>
+       <a-entity geometry="primitive: plane; width: 1; height: 0.4" material="color:#444"
+            position="-0.8 -0.6 0.01" class="raycastable" link="href: 3DVideo.html">
+        <a-plane width="1" height="0.4" color="#444"></a-plane>
+        <a-entity troika-text="value: ⬆️前往; fontSize:0.2; color:#60a0ff" position="0 0 0.01"></a-entity>
+      </a-entity>
+       <a-entity geometry="primitive: plane; width: 1; height: 0.4" material="color:#444"
+            position="0.8 -0.6 0.01" class="raycastable" close-panel="target: #panelVideo">
+        <a-plane width="1" height="0.4" color="#444"></a-plane>
+        <a-entity troika-text="value: ❌關閉; fontSize:0.2; color:#f33" position="0 0 0.01"></a-entity>
+      </a-entity>
     </a-entity>
+
 
     <!-- 燈光 -->
     <a-entity light="type: point; color:#f4f4f4; intensity:1.5; distance:12" position="0 4 4"></a-entity>

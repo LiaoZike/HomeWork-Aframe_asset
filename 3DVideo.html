@@ -1,23 +1,54 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Videosphere</title>
-    <meta name="description" content="Videosphere - A-Frame">
-    <script src="../../../dist/aframe-master.js"></script>
-    <script src="../../js/play-on-click.js"></script>
-    <script src="../../js/hide-on-play.js"></script>
-  </head>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <title>41243166廖子科_網際網路HWK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- A-Frame / plugins -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.3/dist/aframe-particle-system-component.min.js"></script>
+    
+    <!-- <script src="./dist/aframe-master.js"></script> -->
+    <script src="./js/components/play-on-click.js"></script>
+    <script src="./js/components/hide-on-play.js"></script>
+
+    <script src="./dist/aframe-troika-text.min.js"></script>
+    <style>
+        .rs-base .rs-container h1:not(:first-of-type),
+        .rs-base .rs-container h1:not(:first-of-type)+.rs-group {
+            display: none !important;
+        }
+
+        .rs-base .rs-container>.rs-group:first-of-type .rs-counter-base:first-of-type {
+            display: none !important;
+        }
+
+        .rs-base {
+            position: fixed !important;
+            top: 8px;
+            left: 8px;
+            z-index: 99999;
+            pointer-events: none;
+            /* 不擋滑鼠互動 */
+        }
+    </style>
+</head>
+
   <body>
     <a-scene>
       <a-assets>
         <!--
         SOURCE
-        Author: Bitmovin
-        URL:    https://bitmovin.com/demos/vr-360
+        Author: Hugh Hou (https://www.youtube.com/@hughhou)
+        URL:    https://www.youtube.com/watch?v=eU2npxtHS7Q
         -->
         <video id="video" preload="auto"
-               src="https://cdn.bitmovin.com/content/assets/playhouse-vr/progressive.mp4"
+               src="https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/Snowmobile Ride 360° Experience Our memory - Bass Physics - Hugh Hou (1080p, h264, youtube).mp4"
                autoplay loop="true"
                crossOrigin="anonymous"></video>
       </a-assets>
