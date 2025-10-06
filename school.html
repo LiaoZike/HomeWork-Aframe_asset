@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <title>41243166廖子科_網際網路HWK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- A-Frame / plugins -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-particle-system-component@1.0.3/dist/aframe-particle-system-component.min.js"></script>
+    <script src="./dist/aframe-troika-text.min.js"></script>
+    <style>
+        .rs-base .rs-container h1:not(:first-of-type),
+        .rs-base .rs-container h1:not(:first-of-type)+.rs-group {
+            display: none !important;
+        }
+
+        .rs-base .rs-container>.rs-group:first-of-type .rs-counter-base:first-of-type {
+            display: none !important;
+        }
+
+        .rs-base {
+            position: fixed !important;
+            top: 8px;
+            left: 8px;
+            z-index: 99999;
+            pointer-events: none;
+            /* 不擋滑鼠互動 */
+        }
+    </style>
+</head>
+
+<body>
+  <a-scene fog="color: #241417; near: 0; far: 5;" raycaster="far: 30; objects: .raycastable" cursor="rayOrigin: mouse"
+    environment="preset: default; ground: none" stats>
+        <a-entity id="rig" position="-20 -0.5 45">
+            <a-camera wasd-controls look-controls></a-camera>
+        </a-entity>
+        <!-- 返回首頁的資訊面板 -->
+        <a-plane rotation="-90 0 0" position="0 0 0"  width="250" height="100" material="src: https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/road.jpg; repeat: 100 100;shader: flat"></a-plane>
+        <a-entity id="panelBack" class="info-panel" position="-20 1 40" visible="true" look-at="[camera]">
+            <a-plane width="5.5" height="4" color="#222" position="0 0 -0.01" material="opacity:0.85"></a-plane>
+            <a-entity troika-text="value: 從網路上(3dwarehouse)取得 3D 模型，\n透過 3Dencoder 網站轉換為 GLB 格式，\n再將其匯入應用程式並手動調整實際位置。\n>WASD可以移動\n>想離開可以回到這裡返回或是上ㄧ頁\n; fontSize:0.28; color:#fff; anchor:center"
+                position="0 0.9 0.01" class="raycastable"></a-entity>
+            <a-entity geometry="primitive: plane; width: 2; height: 0.5" material="color:#ff0" position="0 -0.6 0.01"
+                class="raycastable" link="href: index.html">
+                <a-plane width="2" height="0.5" color="#666"></a-plane>
+                <a-entity troika-text="value: ↩️返回主頁面; fontSize:0.2; color:#60a0ff" position="0 0 0.01"></a-entity>
+            </a-entity>
+        </a-entity>
+
+        <a-entity 
+            gltf-model="url(https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/永續處.glb)"
+            position="20 -0.1 22"
+            rotation="0 60 0"
+            scale="0.6 0.6 0.6">
+        </a-entity>
+        <a-entity 
+            gltf-model="url(https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/綜一館.glb)"
+            position="15 0 18"
+            rotation="0 65 0"
+            scale="0.6 0.6 0.6">
+        </a-entity>
+        <a-entity 
+            gltf-model="url(https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/綜二_科研.glb)"
+            position="-50 -1 -20"
+            rotation="0 70 0"
+            scale="0.7 0.6 0.6">
+        </a-entity>
+        <a-entity 
+            gltf-model="url(https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/電機館.glb)"
+            position="-7 0 -5"
+            rotation="0 65 0"
+            scale="0.5 0.5 0.5">
+        </a-entity>
+        <a-entity 
+            gltf-model="url(https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/綜三館.glb)"
+            position="-22 0 13"
+            rotation="0 65 0"
+            scale="0.6 0.6 0.6">
+        </a-entity>
+        <a-entity 
+            gltf-model="url(https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/經國館.glb)"
+            position="60 0 10"
+            rotation="0 60 0"
+            scale="0.6 0.6 0.6">
+        </a-entity>
+        <a-entity 
+            gltf-model="url(https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/人文館.glb)"
+            position="90 -1.3 -45"
+            rotation="0 60 0"
+            scale="0.6 0.6 0.6">
+        </a-entity>
+        <a-entity 
+            gltf-model="url(https://raw.githubusercontent.com/LiaoZike/HomeWork-Aframe_asset/main/asset/游泳池.glb)"
+            position="110 -0.1 0"
+            rotation="0 65 0"
+            scale="0.6 0.6 0.6">
+        </a-entity>
+    </a-scene>
+
+</body>
+
+</html>

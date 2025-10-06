@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8" />
+    <title>41243166廖子科_網際網路HWK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- A-Frame / plugins -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-particle-system-component@1.0.3/dist/aframe-particle-system-component.min.js"></script>
+    <script src="./dist/aframe-troika-text.min.js"></script>
+    <style>
+        .rs-base .rs-container h1:not(:first-of-type),
+        .rs-base .rs-container h1:not(:first-of-type)+.rs-group {
+            display: none !important;
+        }
+
+        .rs-base .rs-container>.rs-group:first-of-type .rs-counter-base:first-of-type {
+            display: none !important;
+        }
+
+        .rs-base {
+            position: fixed !important;
+            top: 8px;
+            left: 8px;
+            z-index: 99999;
+            pointer-events: none;
+            /* 不擋滑鼠互動 */
+        }
+    </style>
+</head>
+
+<body>
+    <a-scene shadow="type: pcfsoft" cursor="rayOrigin: mouse" stats>
+        <!-- 返回首頁的資訊面板 -->
+        <a-entity id="panelBack" class="info-panel" position="0 2.5 20" visible="true" look-at="[camera]">
+            <a-plane width="4" height="1.4" color="#222" position="0 0 -0.01" material="opacity:0.85"></a-plane>
+            <a-entity troika-text="value: 由基本幾何物件建構的城堡\n按 L 可控制太陽光; fontSize:0.28; color:#fff; anchor:center"
+                position="0 0.3 0.01" class="raycastable"></a-entity>
+            <a-entity geometry="primitive: plane; width: 2; height: 0.5" material="color:#ff0" position="0 -0.3 0.01"
+                class="raycastable" link="href: index.html">
+                <a-plane width="2" height="0.5" color="#666"></a-plane>
+                <a-entity troika-text="value: ↩️返回主頁面; fontSize:0.2; color:#60a0ff" position="0 0 0.01"></a-entity>
+            </a-entity>
+        </a-entity>
+
+
+
+        <!-- 天空與光線 -->
+        <a-sky color="#FFCFB2"></a-sky>
+        <a-entity light="type: ambient; intensity: 0.4; color: #FFFFFF"></a-entity>
+        <a-entity id="sunLight" light="type: directional; color: #FFE0B2; intensity: 1; castShadow: true"
+            position="10 8 -10"></a-entity>
+
+        <!-- 地板草地 -->
+        <a-plane width="100" height="100" rotation="-90 0 0" color="#567d46"
+            shadow="cast: false; receive: true"></a-plane>
+
+        <!-- 城堡主體 -->
+        <a-entity id="castle" position="0 0 0" shadow="cast: true; receive: true">
+            <!-- 主建築物本體 -->
+            <a-box width="30" depth="10" height="12" color="#DCCCAD" position="0 6 0" shadow></a-box>
+
+            <!-- 中央圓頂（鼓座 + 圓頂） -->
+            <a-cylinder radius="4" height="2" color="#FFD700" position="0 13 0" material="metalness: 1; roughness: 0.2"
+                shadow></a-cylinder>
+            <a-sphere radius="4" color="#FFD700" position="0 18 0" material="metalness: 1; roughness: 0.2"
+                shadow></a-sphere>
+
+            <!-- 四角塔樓 + 尖塔 -->
+            <a-cylinder radius="3" height="12" color="#DCCCAD" position="15 6 5" shadow></a-cylinder>
+            <a-cone radius-bottom="3" radius-top="0" height="4" color="#FFD700" position="15 14 5"
+                material="metalness: 1; roughness: 0.2" shadow></a-cone>
+
+            <a-cylinder radius="3" height="12" color="#DCCCAD" position="-15 6 5" shadow></a-cylinder>
+            <a-cone radius-bottom="3" radius-top="0" height="4" color="#FFD700" position="-15 14 5"
+                material="metalness: 1; roughness: 0.2" shadow></a-cone>
+
+            <a-cylinder radius="3" height="12" color="#DCCCAD" position="15 6 -5" shadow></a-cylinder>
+            <a-cone radius-bottom="3" radius-top="0" height="4" color="#FFD700" position="15 14 -5"
+                material="metalness: 1; roughness: 0.2" shadow></a-cone>
+
+            <a-cylinder radius="3" height="12" color="#DCCCAD" position="-15 6 -5" shadow></a-cylinder>
+            <a-cone radius-bottom="3" radius-top="0" height="4" color="#FFD700" position="-15 14 -5"
+                material="metalness: 1; roughness: 0.2" shadow></a-cone>
+
+            <!-- 屋頂欄杆（女兒牆 + 柱子） -->
+            <a-cylinder radius="0.2" height="1" color="#CBB094" position="-14 11.5 5" shadow></a-cylinder>
+            <a-cylinder radius="0.2" height="1" color="#CBB094" position="-12 11.5 5" shadow></a-cylinder>
+            <a-cylinder radius="0.2" height="1" color="#CBB094" position="-10 11.5 5" shadow></a-cylinder>
+            <a-cylinder radius="0.2" height="1" color="#CBB094" position="10 11.5 5" shadow></a-cylinder>
+            <a-cylinder radius="0.2" height="1" color="#CBB094" position="12 11.5 5" shadow></a-cylinder>
+            <a-cylinder radius="0.2" height="1" color="#CBB094" position="14 11.5 5" shadow></a-cylinder>
+
+            <!-- 欄杆橫樑 -->
+            <a-box width="10" depth="0.3" height="0.2" color="#CBB094" position="-10 12.1 5" shadow></a-box>
+            <a-box width="10" depth="0.3" height="0.2" color="#CBB094" position="10 12.1 5" shadow></a-box>
+
+
+            <!-- 窗戶 + 三角山花 + 窗台（分三層對稱排列） -->
+            <a-plane width="1.2" height="1.8" color="#333333" position="-10 2 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="-10 3.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="-10 1.1 5.1"></a-box>
+
+            <a-plane width="1.2" height="1.8" color="#333333" position="-5 2 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="-5 3.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="-5 1.1 5.1"></a-box>
+
+            <a-box width="2" height="3" depth="0.1" color="#664422" position="0 1.5 5.05"></a-box>
+            <a-triangle color="#CBB094" position="0 4.1 5.15" scale="3 1.2 1"></a-triangle>
+            <a-cylinder radius="0.2" height="3" color="#CBB094" position="-1.2 1.5 5.0"></a-cylinder>
+            <a-cylinder radius="0.2" height="3" color="#CBB094" position="1.2 1.5 5.0"></a-cylinder>
+
+            <a-plane width="1.2" height="1.8" color="#333333" position="5 2 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="5 3.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="5 1.1 5.1"></a-box>
+
+            <a-plane width="1.2" height="1.8" color="#333333" position="10 2 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="10 3.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="10 1.1 5.1"></a-box>
+            <a-plane width="1.2" height="1.8" color="#333333" position="-10 6 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="-10 7.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="-10 5.1 5.1"></a-box>
+            <a-plane width="1.2" height="1.8" color="#333333" position="-5 6 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="-5 7.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="-5 5.1 5.1"></a-box>
+            <a-plane width="1.2" height="1.8" color="#333333" position="0 6 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="0 7.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="0 5.1 5.1"></a-box>
+
+            <a-plane width="1.2" height="1.8" color="#333333" position="5 6 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="5 7.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="5 5.1 5.1"></a-box>
+
+            <a-plane width="1.2" height="1.8" color="#333333" position="10 6 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="10 7.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="10 5.1 5.1"></a-box>
+
+            <a-plane width="1.2" height="1.8" color="#333333" position="-10 10 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="-10 11.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="-10 9.1 5.1"></a-box>
+
+            <a-plane width="1.2" height="1.8" color="#333333" position="-5 10 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="-5 11.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="-5 9.1 5.1"></a-box>
+
+            <a-plane width="1.2" height="1.8" color="#333333" position="0 10 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="0 11.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="0 9.1 5.1"></a-box>
+
+            <a-plane width="1.2" height="1.8" color="#333333" position="5 10 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="5 11.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="5 9.1 5.1"></a-box>
+
+            <a-plane width="1.2" height="1.8" color="#333333" position="10 10 5.1"></a-plane>
+            <a-triangle color="#CBB094" position="10 11.1 5.15" scale="1.5 0.8 1"></a-triangle>
+            <a-box width="1.5" height="0.2" depth="0.2" color="#CBB094" position="10 9.1 5.1"></a-box>
+        </a-entity>
+
+
+        <!-- 巴洛克噴泉（多層設計 + 水粒子特效） -->
+        <a-entity id="fountain" position="0 0 12" shadow="cast: true; receive: true">
+            <!-- 噴泉水池 -->
+            <a-cylinder radius="5" height="0.5" color="#EEEEEE" open-ended="true" material="side: double"
+                position="0 0.25 0" shadow></a-cylinder>
+            <a-cylinder radius="4.5" height="0.05" color="#4BC7FF" position="0 0.28 0"
+                material="opacity: 0.8"></a-cylinder>
+
+            <!-- 第一層水盆 -->
+            <a-torus radius="2.5" tube="0.15" color="#EEEEEE" position="0 2 0" shadow></a-torus>
+            <a-cylinder radius="2.3" height="0.02" color="#4BC7FF" position="0 1.95 0"
+                material="opacity: 0.8"></a-cylinder>
+
+            <!-- 第二層水盆 -->
+            <a-torus radius="1.2" tube="0.1" color="#EEEEEE" position="0 3.8 0" shadow></a-torus>
+            <a-cylinder radius="1.1" height="0.02" color="#4BC7FF" position="0 3.75 0"
+                material="opacity: 0.8"></a-cylinder>
+
+            <!-- 頂端裝飾 + 水流粒子 -->
+            <a-sphere radius="0.2" color="#EEEEEE" position="0 4.6 0" shadow></a-sphere>
+            <a-entity
+                particle-system="preset: default; color: #ACF2FB, #FFFFFF; particleCount: 1000; size: 0.2; velocityValue: 0 10 0; velocitySpread: 3 2 3; accelerationValue: 0 -9 0"
+                position="0 4.6 0"></a-entity>
+        </a-entity>
+
+        <!-- 庭院雕像 -->
+        <a-entity id="statue1" position="-8 0 10" shadow="cast: true; receive: true">
+            <a-box width="1" depth="1" height="1" color="#888888" position="0 0.5 0"></a-box>
+            <a-cylinder radius="0.3" height="1.5" color="#888888" position="0 1.75 0"></a-cylinder>
+            <a-sphere radius="0.3" color="#888888" position="0 2.8 0"></a-sphere>
+        </a-entity>
+
+        <!-- 雕像資訊文字（互動顯示） -->
+        <a-text id="infoText" value="巴洛克石像\n17世紀風格" align="center" position="-8 3.5 10" width="4" color="#FFFFFF"
+            visible="false" background="color: #000000; opacity: 0.5"></a-text>
+
+        <!-- 相機 + WASD控制 -->
+        <a-entity camera position="0 3 25" look-controls wasd-controls>
+            <a-cursor fuse="false" material="color: cyan; shader: flat"
+                geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.015" position="0 0 -1"></a-cursor>
+        </a-entity>
+    </a-scene>
+
+    <!-- 腳本互動 -->
+    <script>
+        document.querySelector('#statue1').addEventListener('click', function () {
+            document.querySelector('#infoText').setAttribute('visible', true);
+        });
+        window.addEventListener('keydown', function (e) {
+            if (e.key === 'l' || e.key === 'L') {
+                var sunEl = document.querySelector('#sunLight');
+                var lightComp = sunEl.getAttribute('light');
+                var newIntensity = (lightComp.intensity > 0) ? 0 : 1;
+                sunEl.setAttribute('light', 'intensity', newIntensity);
+            }
+        });
+    </script>
+</body>
+
+</html>
